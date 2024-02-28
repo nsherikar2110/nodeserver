@@ -12,7 +12,7 @@ redisclient.connect().then(res => {
 
 async function savetoredis(user, data) {
     
-    console.log(user,data)
+    console.log(user)
     try {
         redisclient.SETEX(user,15,JSON.stringify)
         a = redisclient.get(user)
