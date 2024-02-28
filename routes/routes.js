@@ -2,7 +2,7 @@ const router = require("express").Router();
 const redis = require('redis');
 const redisclient = redis.createClient();
 const axios=require('axios')
-
+console.log("hrlloe")
 
 redisclient.connect().then(res => {
     console.log("connected to redis");
