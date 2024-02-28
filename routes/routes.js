@@ -11,6 +11,7 @@ redisclient.connect().then(res => {
 })
 
 async function savetoredis(user, data) {
+    
     console.log(user,data)
     try {
         redisclient.SETEX(user,15,JSON.stringify)
