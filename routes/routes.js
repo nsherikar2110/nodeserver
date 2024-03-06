@@ -91,11 +91,11 @@ router.get('/:conversationId', function (req, res) {
         axios(options).then(response => {
             // console.log(response.data)
             if (response.data && response.status == 200) {
-                var participant = response.data.participants.slice(-1)[0]; // Get the last participant
+                var participant = response.data.participants.slice(-1)[0]; // Get the latest agent
                 var participantAId = participant.aId;
                 console.log(participantAId)
 
-                // Make second API call with participantAId
+                //  second API call with participantAId for customerId
                 var secondOptions = {
                     method: 'GET',
                     url: `https://smartassist.kore.ai/agentassist/api/v1/public/st-9086dbe5-9e1f-54fd-a4f6-ed60a561f40a/agents/`+ participantAId,
@@ -105,14 +105,14 @@ router.get('/:conversationId', function (req, res) {
                 axios(secondOptions).then(secondResponse => {
                     console.log(secondResponse)
                     if (secondResponse.data && secondResponse.status == 200) {
-                        // Get the last participant from the first API response
+                        // Get the last partipnt from the first API response
                         var lastParticipantIndex = response.data.participants.length - 1;
                         var lastParticipant = response.data.participants[lastParticipantIndex];
 
-                        // Add customId from the second API response to the last participant object
+                        //  customId from the second API , last participant object
                         lastParticipant.customId = secondResponse.data.customId;
 
-                        // Send the modified response
+                        // the modified response
                         res.header("Access-Control-Allow-Origin", "*");
                         res.status(response.status)
                         res.send(response.data);
